@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>hust复试回忆 | TuringF&#39;s blog</title>
+  <meta name="author" content="turingF">
+  
+  <meta name="description" content="真题回忆笔试和大部分人一样选了数据库和算法，考的一般，主要讲一下大题考的地方。
+
+数据库：第一题是考用选择投影链接那些运算拼出来他要的查询条件，然后写SQL语言，特别是SQL那边查询很复杂，建议掌握相关子查询可以大量减少书写量。第二题是给你两个事务，让你组一个可串行序列，然后又问你如果遵循2PL怎么排序列可能会死锁。想不到这章考的这么细。第三题是标准ER图，瞎画就完事了。
+
+算法：算法是10道选择（102）和两道设计（152）。选择坑的是考了个NP和P问题的关系，大题第一个就是个二分查找，第二题是考回溯算法。我一直以为回溯很蠢，就是个树的DFS，结果真正写起伪代码发现还是有点问题，看来回溯还是要认真看一下实现步骤的。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="hust复试回忆">
+  <meta property="og:site_name" content="TuringF&#39;s blog">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+</html>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TuringF&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> hust复试回忆</h1>
+		</div>
+	
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="真题回忆"><a href="#真题回忆" class="headerlink" title="真题回忆"></a>真题回忆</h1><h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>和大部分人一样选了数据库和算法，考的一般，主要讲一下大题考的地方。</p>
+<ul>
+<li><p>数据库：第一题是考用选择投影链接那些运算拼出来他要的查询条件，然后写SQL语言，特别是SQL那边查询很复杂，建议掌握相关子查询可以大量减少书写量。<br>第二题是给你两个事务，让你组一个可串行序列，然后又问你如果遵循2PL怎么排序列可能会死锁。想不到这章考的这么细。<br>第三题是标准ER图，瞎画就完事了。</p>
+</li>
+<li><p>算法：算法是10道选择（10<em>2）和两道设计（15</em>2）。选择坑的是考了个NP和P问题的关系，大题第一个就是个二分查找，第二题是考回溯算法。我一直以为回溯<br>很蠢，就是个树的DFS，结果真正写起伪代码发现还是有点问题，看来回溯还是要认真看一下实现步骤的。</p>
+</li>
+</ul>
+<a id="more"></a> 
+<h2 id="机试"><a href="#机试" class="headerlink" title="机试"></a>机试</h2><p>今年机试爆炸，考了文件操作，md这谁记得啊，我好不容易从include文件夹检索所有头文件找到了要用fstream，结果死活不能把流对象转成char *，浪费了很多时间。</p>
+<p>题目有三个，除了最后一个难剩下的很简单：</p>
+<ul>
+<li><p>1.梅林素数，反正核心代码就是个判断素数，送分题。</p>
+</li>
+<li><p>2.把上一题的源代码转存为”abc.c”，并读取这个文件内容（巨坑的文件操作），<br>并尝试把其中的注释(//和/*<em>/)里的内容全部删掉，本质就是遍历字符串，如果碰到//就跳过直到\n，如果碰到/</em>就跳过直至*/，说起来很烦但其实就两行代码解决 </p>
+</li>
+<li><p>3.输入一段文字加密，<br>每个字母变成其后两个字母，如a -&gt; c, d -&gt; f 。若是y,z就对应a，b，即形成一个环。依旧是个遍历字符串题。 最后还有一小问压轴，就是把密文再进行奇校验（二进制，最高位设为0/1保证其二进制中始终仅奇数个1），考察的是<br>二进制和十进制的相互转换和如何判断二进制中有几个1（这个好难）。</p>
+</li>
+</ul>
+<p>总结难度适中，核心是判断素数，遍历字符串，十/二进制转换，不得不说和去年考的核心部分重叠部分好大。</p>
+<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>真的很巧，我是南航的学生，结果我报考的团队BOSS就是南航毕业的。但其实复试也没什么，我是把本科的获奖资料拿过去了，也有人做了简历去面试的（我怎么就没想到做份简历呢- -）。总之进去后先是自我介绍一下，然后讲讲自己的<strong>项目经历</strong>。然后BOSS就和我唠南航的家常，说什么南航的副校长还有我们院院长都是他同学:)。之后随便问了些志愿方面的东西就结束了，出来后和其他团队面试完的谈了谈，结果他说他面试也是问了些无聊的问题，亏我还一直以为他会问专业方面的问题，看来面试就是走个流程，核心还是要把复试笔试和机试搞好。特别是机试很关键，一定要多练习练习。</p>
+<h1 id="summary-and-suggestions"><a href="#summary-and-suggestions" class="headerlink" title="summary and suggestions"></a>summary and suggestions</h1><p>笔试每年考点不一样，好好复习吧，特别是 <strong>回溯法</strong> 。英语简单说一下，听力白给，10个选择题，只要你过了CET4保证你对9个。口语就那样，看个人语言表达能力了，随机性很高。主要说一下上机，感触还是挺大的，昨天晚上搞到一点多，把一些题刷了刷看了看C++常用函数，结果今早考试50%都用到了，很高兴。</p>
+<p>先列几个C++很有可能用到的库：</p>
+<ul>
+<li>#include&lt;string.h&gt; 这是个非常恐怖的库，它有很多便捷的函数，字符串操作每年必考吧，那么涉及到字符串（char *）那就可以用到这个库。首先，介绍 <strong>最最最最</strong>常用的一个函数strlen(a),返回a的长度。这个库其他函数你可以不会，但这个你一定要会。考虑这样的情况，遍历字符串为什么要用到strlen？没错就是i的上界。 你定义了一个char a[MAX], 然后输入std::cin &gt;&gt; a,然后呢你不可能对i 0-&gt;MAX循环吧，上界必定是strlen(a)。其余库函数还有strcpy和memset也可以用，稍微看一看就好。课外小问题，如何定义一个初始全是0的int a[max]数组？答案是int a[max] = {0}; </li>
+</ul>
+<blockquote>
+<p>补充和 #include&lt; string&gt;区别，string.h是C语言对字符串的操作函数库，函数如上。而string库则是C++定义的一种叫string 的结构，这种结构类似向量，很好用，但基本上机是用不到这个库的。</p>
+</blockquote>
+<ul>
+<li><p>#include&lt;math.h&gt; 方便计算的库，常用的是pow和sqrt。pow指数函数的使用今年考了两次（真的好用），一次是梅林素数，一次是二进制转十进制，算是很常用的函数。sqrt用于判定素数的优化，但其实不优化也行，能做出来就行考虑时间复杂度干啥。</p>
+</li>
+<li><p>#include&lt; fstream&gt;, 今年新增的文件坑 </p>
+</li>
+</ul>
+<p>剩下的stdlib是涉及动态分配malloc或系统函数exit/pause的，选用。</p>
+<h1 id="xyzexal-record"><a href="#xyzexal-record" class="headerlink" title="xyzexal record"></a>xyzexal record</h1><h2 id="2019-3-10"><a href="#2019-3-10" class="headerlink" title="2019.3.10"></a>2019.3.10</h2><p>我透，今天华科出学硕指标，从5人扩招了25人了，好好努力！15号要去报道。</p>
+<h2 id="2019-3-13"><a href="#2019-3-13" class="headerlink" title="2019.3.13"></a>2019.3.13</h2><p>今天早上坐高铁来了武汉，中午来了宾馆。下午走着去华科里面看了看（第一次去结果跟着地图绕了很远的路），和约好的老师见了见面。晚上回来看了一晚上直播（因为今天太累了）就睡了。</p>
+<h2 id="2019-3-14"><a href="#2019-3-14" class="headerlink" title="2019.3.14"></a>2019.3.14</h2><p>安心准备复试的一天。</p>
+<h2 id="2019-3-15"><a href="#2019-3-15" class="headerlink" title="2019.3.15"></a>2019.3.15</h2><p>早上一早起来爬起来就去报道，说8点开始我7.50到就排了一排人，所以说这群人都是怪物把。一个人平均5分钟，我九点多才搞完，出来看到后面排的队已经长的不知道哪去了。走着去最近的一家starbucks（二十分钟路程，其实也很远）假装去学习，其实玩了两小时手机然后回校。二点多有体检，搞完大概四点多。然后去西12楼（还是很远）找了个自习室安心看了会书，晚上考完试9点回来准备机试到1点半。</p>
+<h2 id="2019-3-16"><a href="#2019-3-16" class="headerlink" title="2019.3.16"></a>2019.3.16</h2><p>早上机试考文件，爆炸。然后坐校车去东9楼（走着去估计得40分钟）英语口语，答得一般。下午回来就轻松多了，就剩下明早面试了，感觉很水。</p>
+<h2 id="2019-3-17"><a href="#2019-3-17" class="headerlink" title="2019.3.17"></a>2019.3.17</h2><p>刚刚面试完，心里还有有点不安但又充满期待的，今年学硕扩招，虽然我知道我不是前几名但混个中游还是没问题的，明后天就出录取结果了，这三天睡了6+4+5个小时，都是因为我来这边前没怎么复习的结果，算是临时抱佛脚吧。考虑下午是睡觉还是去武大玩还是去网吧玩，反正考完了high就完事了。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/07/06/Kenerl-test/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/03/09/R-second/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-03-10 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/learn/">learn<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2019 turingF
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+
+</div>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

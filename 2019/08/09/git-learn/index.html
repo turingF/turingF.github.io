@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>git-learn | TuringF&#39;s blog</title>
+  <meta name="author" content="turingF">
+  
+  <meta name="description" content="mbp到了嗷，画质看哭我了。早就想写blog了可惜hexo这边同步出了点问题，今早花时间搞定了，来写mac上的第一篇blog:)。ps说到底还是用vscode，真不知道mac有啥用2333
+因为之前虽然对git使用过但一直没有系统整理，这几天看了git pro后就整理下。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="git-learn">
+  <meta property="og:site_name" content="TuringF&#39;s blog">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+</html>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TuringF&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> git-learn</h1>
+		</div>
+	
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>mbp到了嗷，画质看哭我了。早就想写blog了可惜hexo这边同步出了点问题，今早花时间搞定了，来写mac上的第一篇blog:)。ps说到底还是用vscode，真不知道mac有啥用2333</p>
+<p>因为之前虽然对git使用过但一直没有系统整理，这几天看了git pro后就整理下。</p>
+<a id="more"></a>
+<h1 id="git概念和存储状态"><a href="#git概念和存储状态" class="headerlink" title="git概念和存储状态"></a>git概念和存储状态</h1><p>首先是git的存储，其是按照各个文件的版本来存储.存储的文件都会放在.git文件夹里。可以使用</p>
+<pre><code>git init
+</code></pre><p>来完成对一个git的初始化。</p>
+<p>git文件中分为三个区域：</p>
+<ul>
+<li>工作区域（working space）：存放当前工作的内容</li>
+<li>暂存区(stage): 存放git add后的临时储存区域</li>
+<li>repo（.git）：存放git commit后的所有版本</li>
+</ul>
+<p>使用</p>
+<pre><code>git status
+</code></pre><p>可以查看所有文件的所在区域。</p>
+<blockquote>
+<p>.gitignore 中存放着被git忽略的文件。</p>
+</blockquote>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p>文件修改操作分为untrack和unmodifed两种。</p>
+<p>可使用</p>
+<pre><code>git diff
+</code></pre><p>来比较工作区和暂存区的文件差异，一般来说在你add前需要对比下差异。</p>
+<p>可使用</p>
+<pre><code>git commit -a 【-m &quot;message&quot;】
+</code></pre><p>来同时完成add和commit。</p>
+<p>最后可使用</p>
+<pre><code>git log
+</code></pre><p>来查看各个commit版本。</p>
+<p>对某个版本的前序列号使用git reset可以回溯版本，同时可使用</p>
+<pre><code>git tag v0.x
+</code></pre><p>来对序列号进行标注。</p>
+<p>对特定文件a.txt回溯到上个版本可使用：</p>
+<p>git checkout – a.txt</p>
+<h1 id="远程版本"><a href="#远程版本" class="headerlink" title="远程版本"></a>远程版本</h1><p>作为git分布式的基础，就是要构建远程仓库(比如github)。作为第一次使用git的用户记得设置下自己的用户信息：</p>
+<pre><code>git config --global user.name XXX
+git config --global user.email XXX@xxx
+</code></pre><p>之后使用</p>
+<pre><code>git remote add &lt;shortname&gt; &lt;url&gt;
+</code></pre><p>来添加远程仓库。</p>
+<p>可使用</p>
+<pre><code>git config --list
+</code></pre><p>查看下你当前的git配置信息。</p>
+<h2 id="爬取"><a href="#爬取" class="headerlink" title="爬取"></a>爬取</h2><p>在锁定了远程仓库后，初次可使用：</p>
+<pre><code>git pull
+</code></pre><p>来爬取所有远程库的数据。</p>
+<p>之后可使用</p>
+<pre><code>git fetch
+</code></pre><p>来获取最新版本。</p>
+<p>当然也可以使用：</p>
+<pre><code>git clone &lt;repo&gt;
+</code></pre><p>其可相当于：</p>
+<pre><code>mkdir repo
+git init   //创建.git目录
+git remote add &lt;git@repo&gt; //锁定remote
+git pull //拉取
+</code></pre><hr>
+<h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><p>远程仓库的默认姓名为origin,一般直接传给远程master分支，则：</p>
+<pre><code>git push -u origin master
+</code></pre><p>会把你的repo仓库同步到远程仓库。</p>
+<p>可使用</p>
+<pre><code>git show origin 
+</code></pre><p>查看具体远程仓库内容。</p>
+<p>使用</p>
+<pre><code>git remote -v
+</code></pre><p>可以达到同样效果。</p>
+<h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><p>版本的最强功力就是使用分支，</p>
+<pre><code>git branch XXX
+</code></pre><p>可以创建当前文件的克隆作为分支。</p>
+<p>使用</p>
+<pre><code>git checkout XXX 
+</code></pre><p>来进行回溯。</p>
+<p>使用</p>
+<pre><code>git branch -v
+</code></pre><p>查看所有的分支。</p>
+<p>使用</p>
+<pre><code>git branch -d XXX
+</code></pre><p>来删除分支。</p>
+<h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><p>当要合并的两个版本是线性关系时，即可使用快速合并来合并（fast ward）：</p>
+<pre><code>（master*）git merge XXX
+</code></pre><p>即可使XXX和master合并。</p>
+<p>当两者存在冲突文件时（都对同一文件做了不同修改），则需要使用</p>
+<pre><code>(master*)git status
+</code></pre><p>它会提示你所有未merge的分支并提示你冲突文件，此时需要手动解决。</p>
+<h2 id="HEAD指针"><a href="#HEAD指针" class="headerlink" title="HEAD指针"></a>HEAD指针</h2><p>head指向当前版本的分支，即*。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/07/06/Kenerl-test/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-08-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/git/">git<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2019 turingF
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+
+</div>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

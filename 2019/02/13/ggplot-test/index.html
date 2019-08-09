@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>ggplot_test | TuringF&#39;s blog</title>
+  <meta name="author" content="turingF">
+  
+  <meta name="description" content="ggplot2练习目的：得到一组大学生就业数据，根据该数据进行画图。
+参考： https://www.jianshu.com/p/03719d7c207f
+ggplot2 安装与加载#install
+install.packages(&amp;quot;ggplot2&amp;quot;)
+
+#load
+library(ggplot2)
+数据准备得到四组xls文件，在excel中另存为csv文件，然后使用
+data &amp;lt;- read.csv(file = &amp;apos;XXX.csv&amp;apos;)
+即可得到数据集">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ggplot_test">
+  <meta property="og:site_name" content="TuringF&#39;s blog">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+</html>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TuringF&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> ggplot_test</h1>
+		</div>
+	
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="ggplot2练习"><a href="#ggplot2练习" class="headerlink" title="ggplot2练习"></a>ggplot2练习</h1><p>目的：得到一组大学生就业数据，根据该数据进行画图。</p>
+<p>参考： <a href="https://www.jianshu.com/p/03719d7c207f" target="_blank" rel="noopener">https://www.jianshu.com/p/03719d7c207f</a></p>
+<h2 id="ggplot2-安装与加载"><a href="#ggplot2-安装与加载" class="headerlink" title="ggplot2 安装与加载"></a>ggplot2 安装与加载</h2><pre><code>#install
+install.packages(&quot;ggplot2&quot;)
+
+#load
+library(ggplot2)
+</code></pre><h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>得到四组xls文件，在excel中另存为csv文件，然后使用</p>
+<pre><code>data &lt;- read.csv(file = &apos;XXX.csv&apos;)
+</code></pre><p>即可得到数据集</p>
+<a id="more"></a>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>图表中要求有就业地，人数，性别三个因素，初步用就业地做横坐标，把人数做纵坐标，性别分开显示，demo如下：</p>
+<p><img src="\pic\demo1.png" alt="初步图片"></p>
+<h2 id="PROG-START"><a href="#PROG-START" class="headerlink" title="PROG START"></a>PROG START</h2><p>首先先做一个各个年中在本省工作与外省工作的柱状统计：</p>
+<p>分离单位所在地的前三个字符串并把它作为prov栏写入：</p>
+<blockquote>
+<p>分割字符串函数：substring(x,start,end)</p>
+</blockquote>
+<pre><code>X2016$prov &lt;-  substring(X2016$dwszd,1,3)
+sum(X2016$prov == &quot;陕西省&quot;,na.rm = TRUE) #353
+sum(X2016$prov != &quot;陕西省&quot;,na.rm = TRUE) #151
+#另外50个NA不计入统计
+</code></pre><p>OK，现在数据已经有了，接下来是画图和把各年份合成一张图。</p>
+<h3 id="统计各年陕西省内男女人数："><a href="#统计各年陕西省内男女人数：" class="headerlink" title="统计各年陕西省内男女人数："></a>统计各年陕西省内男女人数：</h3><pre><code>a2015 &lt;- c(sum(D2015$prov == &quot;陕西省&quot; &amp; D2015$xb == &quot;男&quot;,na.rm = TRUE),sum(D2015$prov == &quot;陕西省&quot; &amp; D2015$xb == &quot;女&quot;,na.rm = TRUE))
+
+#将各数据合成表格
+data1 &lt;-cbind(a2015,a2016,a2017)
+
+#使用barplot画图
+barplot(data1,main = &quot;陕西省就职人数&quot;,names.arg = years,xlab = &quot;月份&quot;,ylab = &quot;收入&quot;,col = colors)
+
+legend(&quot;topleft&quot;, regions, cex = 0.5, fill = colors)
+</code></pre><h3 id="各年份省内外就业人数："><a href="#各年份省内外就业人数：" class="headerlink" title="各年份省内外就业人数："></a>各年份省内外就业人数：</h3><pre><code>#合成数据框
+data2 &lt;- data.frame(year = c(2015,2016,2017,2015,2016,2017),arange = c(&quot;省内&quot;,&quot;省内&quot;,&quot;省内&quot;,&quot;省外&quot;,&quot;省外&quot;,&quot;省外&quot;),peo = c(a5,a6,a7,b5,b6,b7))
+
+ggplot(data2,aes(year,peo,fill=arange)) + geom_bar(stat = &quot;identity&quot;,position = &quot;dodge&quot;) #使用ggplot2主题
+</code></pre><h3 id="各年度就业方向饼状图"><a href="#各年度就业方向饼状图" class="headerlink" title="各年度就业方向饼状图"></a>各年度就业方向饼状图</h3><pre><code>#获得所有就业方向
+qy &lt;- unique(substring(D2015$dwxz,1,2))
+qy &lt;- qy[2:7] #去掉首元素NA
+
+#统计2015年各方向人数
+for (i in qy) {
+    qyp &lt;- append(qyp,sum(D2015$qy == i,na.rm = TRUE))
+ }
+</code></pre>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/03/09/R-second/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/01/16/R-firstday/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-02-13 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/R/">R<span>4</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2019 turingF
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+
+</div>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
