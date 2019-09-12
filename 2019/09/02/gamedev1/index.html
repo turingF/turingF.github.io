@@ -88,20 +88,8 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class=""></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
 			<a href="/about" title="About me.">
 			  <i class=""></i>About
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
-			  <i class=""></i>RSS
 			</a>
 		  </li>
 		  
@@ -139,7 +127,7 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="GAME-START"><a href="#GAME-START" class="headerlink" title="GAME START"></a>GAME START</h1><h2 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h2><p>首先是游戏主体作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition</p>
+	  <h1 id="GAME-START"><a href="#GAME-START" class="headerlink" title="GAME START"></a>GAME START</h1><h2 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h2><p>首先是游戏主体作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该去除重力并且冻结z坐标，以达到平面移动的目的。</p>
 	  
 	</div>
 
@@ -149,7 +137,8 @@ var _hmt = _hmt || [];
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2019/09/12/pictest/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
@@ -196,7 +185,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/gamedev-diary/">gamedev diary<span>1</span></a></li>
+  <li><a href="/tags/gamedev/">gamedev<span>1</span></a></li>
     </ul>
 	</div>
 		
@@ -226,9 +215,15 @@ var _hmt = _hmt || [];
 <p>
   &copy; 2019 turingF
   
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
-     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> ,
+      <br> THANKS FOR YOUR VISITING :).
 </p>
+
+
+<span id="busuanzi_container_site_pv">
+  <br>
+  不算子统计总浏览量：<span id="busuanzi_value_site_pv"></span>次
+</span>
 
 
 
