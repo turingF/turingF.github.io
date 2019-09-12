@@ -9,7 +9,7 @@
   <title>gamedev pro | TuringF&#39;s blog</title>
   <meta name="author" content="turingF">
   
-  <meta name="description" content="GAME STARTday 1-2首先是游戏主体作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围以及决定是否为trigger。为防止位移在物">
+  <meta name="description" content="day 1-2物体移动和物理设置角色移动首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该去除重力并且冻结z坐标，以达到平面移动的目的。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -127,7 +127,21 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="GAME-START"><a href="#GAME-START" class="headerlink" title="GAME START"></a>GAME START</h1><h2 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h2><p>首先是游戏主体作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该去除重力并且冻结z坐标，以达到平面移动的目的。</p>
+	  <h1 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h1><h2 id="物体移动和物理设置"><a href="#物体移动和物理设置" class="headerlink" title="物体移动和物理设置"></a>物体移动和物理设置</h2><h3 id="角色移动"><a href="#角色移动" class="headerlink" title="角色移动"></a>角色移动</h3><p>首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该<strong>去除重力</strong>并且<strong>冻结z坐标</strong>，以达到平面移动的目的。<br><a id="more"></a></p>
+<p>解决了平行移动的问题，接下来就是控制速度，在每帧中使用</p>
+<pre><code>Time.deltaTime*[speed]
+</code></pre><p>来让速度以时间为单位移动。同时使用</p>
+<pre><code>Input.GetAxis(&quot;Horizontal&quot;/&quot;Vertical&quot;)
+</code></pre><p>来读取键盘的左右键输入(得到值为-1/1）。</p>
+<h3 id="物理设置"><a href="#物理设置" class="headerlink" title="物理设置"></a>物理设置</h3><p>将graphics中的透明度transparency中设置为(x,y,z) -&gt; (0,1,0)表示根据y的高度进行掩盖。这样当物体重叠时会显示y较低的物品，达到视觉上的遮盖效果。值得一提的是判定物体positin的其实是一个点坐标，可在sprite里设置。通常设置为底部中间。</p>
+<hr>
+<h2 id="sprite精灵"><a href="#sprite精灵" class="headerlink" title="sprite精灵"></a>sprite精灵</h2><p>一个物体设置到scene大致分为：</p>
+<ul>
+<li>将png图片作为sprite导入，这里可以设置它的PIXEL PER UNIT（PPU）来确定其相对于一个unit的大小，PPU等于分辨率时sprite恰好为一个unit大小</li>
+<li>将sprite drag到hierarchy作为instance</li>
+<li>将instance拖入prefabs文件夹作为统一类管理，对instance的修改可通过override复写到prefabs里</li>
+</ul>
+<h2 id="Gird网格"><a href="#Gird网格" class="headerlink" title="Gird网格"></a>Gird网格</h2><p>在设置完物体后当然接下来就是画地图了。</p>
 	  
 	</div>
 

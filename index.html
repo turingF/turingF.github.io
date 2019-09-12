@@ -143,8 +143,7 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<h1 id="GAME-START"><a href="#GAME-START" class="headerlink" title="GAME START"></a>GAME START</h1><h2 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h2><p>首先是游戏主体作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该去除重力并且冻结z坐标，以达到平面移动的目的。</p>
-
+		<h1 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h1><h2 id="物体移动和物理设置"><a href="#物体移动和物理设置" class="headerlink" title="物体移动和物理设置"></a>物体移动和物理设置</h2><h3 id="角色移动"><a href="#角色移动" class="headerlink" title="角色移动"></a>角色移动</h3><p>首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该<strong>去除重力</strong>并且<strong>冻结z坐标</strong>，以达到平面移动的目的。<br></p>
 	
 	</div>
   <a type="button" href="/2019/09/02/gamedev1/#more" class="btn btn-default more">Read More</a>
@@ -239,7 +238,7 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2019/03/10/hust复试回忆/" >hust复试回忆</a>
+			<a href="/2019/03/10/HUST TEST/" >hust复试回忆</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -262,7 +261,7 @@ var _hmt = _hmt || [];
 </ul>
 	
 	</div>
-  <a type="button" href="/2019/03/10/hust复试回忆/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2019/03/10/HUST TEST/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -406,9 +405,9 @@ library(ggplot2)
 		
 			<li><a href="/tags/gamedev/">gamedev<span>1</span></a></li>
 		
-			<li><a href="/tags/R/">R<span>4</span></a></li>
-		
 			<li><a href="/tags/learn/">learn<span>1</span></a></li>
+		
+			<li><a href="/tags/R/">R<span>4</span></a></li>
 		
 		 
 		</ul>
@@ -438,7 +437,7 @@ library(ggplot2)
       </li>
     
       <li>
-        <a href="/2019/03/10/hust复试回忆/" ><i class="fa fa-file-o"></i>hust复试回忆</a>
+        <a href="/2019/03/10/HUST TEST/" ><i class="fa fa-file-o"></i>hust复试回忆</a>
       </li>
     
   </ul>
