@@ -9,7 +9,8 @@
   <title>gamedev pro | TuringF&#39;s blog</title>
   <meta name="author" content="turingF">
   
-  <meta name="description" content="day 1-2物体移动和物理设置角色移动首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该去除重力并且冻结z坐标，以达到平面移动的目的。">
+  <meta name="description" content="unity3D入门，跑了个2D beginner的教学项目，总结下要点。
+day 1-2物体移动和物理设置角色移动首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该去除重力并且冻结z坐标，以达到平面移动的目的。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -127,7 +128,8 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h1><h2 id="物体移动和物理设置"><a href="#物体移动和物理设置" class="headerlink" title="物体移动和物理设置"></a>物体移动和物理设置</h2><h3 id="角色移动"><a href="#角色移动" class="headerlink" title="角色移动"></a>角色移动</h3><p>首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该<strong>去除重力</strong>并且<strong>冻结z坐标</strong>，以达到平面移动的目的。<br><a id="more"></a></p>
+	  <p>unity3D入门，跑了个2D beginner的教学项目，总结下要点。</p>
+<h1 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h1><h2 id="物体移动和物理设置"><a href="#物体移动和物理设置" class="headerlink" title="物体移动和物理设置"></a>物体移动和物理设置</h2><h3 id="角色移动"><a href="#角色移动" class="headerlink" title="角色移动"></a>角色移动</h3><p>首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该<strong>去除重力</strong>并且<strong>冻结z坐标</strong>，以达到平面移动的目的。<br><a id="more"></a></p>
 <p>解决了平行移动的问题，接下来就是控制速度，在每帧中使用</p>
 <pre><code>Time.deltaTime*[speed]
 </code></pre><p>来让速度以时间为单位移动。同时使用</p>
@@ -141,7 +143,11 @@ var _hmt = _hmt || [];
 <li>将sprite drag到hierarchy作为instance</li>
 <li>将instance拖入prefabs文件夹作为统一类管理，对instance的修改可通过override复写到prefabs里</li>
 </ul>
-<h2 id="Gird网格"><a href="#Gird网格" class="headerlink" title="Gird网格"></a>Gird网格</h2><p>在设置完物体后当然接下来就是画地图了。</p>
+<h2 id="Gird网格"><a href="#Gird网格" class="headerlink" title="Gird网格"></a>Gird网格</h2><p>在设置完物体后当然接下来就是画地图了。在hierarchy新建tilemap物体，这里需要加入rigid并且type设为static即禁止移动，同时使用tilemap colider的composite来忽略各个tile的间距而使其成为一个整体。设置好gird后接下来就是画图了，在window/tile palette画板上加入sprite。这里需要将一个sprite进行切割(since)，可在sprite的editor进行切割。OK。接下来就是画图了，create yourself:).把tilemap的图层设为-10表示位于最底层现实。之后为了能让ruby在地上跑，需要调整tilemap的碰撞域，在sprite中把地面的colider type设为none即可。</p>
+<h1 id="day-3-4"><a href="#day-3-4" class="headerlink" title="day 3-4"></a>day 3-4</h1><h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h2><p>接下来同理设置好了机器人和草莓的object。对于草莓，是个单纯的box colider，在人物撞击草莓时，草莓应该进行碰撞检测(OnTriggerEnter2D)。注意这里应该是两个box colider的撞击，所以应该是撞击物体也是collider，直接从中判断撞击中是否有RubbyController,即是否装上玩家。如果是则判断玩家是否是满血，如果不是调用其加血函数并销毁该草莓（消耗）。</p>
+<p>同理在damage zoom里，也是box colider，不同的是应把撞击检测改为OnTriggerStay2D。但掉血是按帧判断的，所以血会瞬间掉没。所以给ruby设置了无敌时间，需要三个parm: 作为公共变量的timer以供设置无敌时间和计时器counter，和无敌状态invincible。在血量计算中应该使用Mathf.Clamp函数以控制在min-max之间。</p>
+<h2 id="script结构"><a href="#script结构" class="headerlink" title="script结构"></a>script结构</h2><p>总结下script的部分结构，start函数在创建该物体时调用一次，update是逐帧调用，要跟时间的话需要Time。deltaTime来辅助。awake函数是在唤醒时调用，在动态生成物体时(Instantiate)，start函数会在下一帧调用，所以需要awake函数。一般开头设置公共变量为总计量值供调整。可以使用GET等限制条件来控制外界对变量的访问权限。在Start主要是对一些内部控制变量初始化，比如当前HP，该object的rigid，animator等属性实例(GetComponent&lt;&gt;())。在Update中主要捕获输入进行移动，判断。最后就是功能函数，一般不设置访问权限以供外界获得controller实体后能够调用该功能函数。</p>
+<p>##</p>
 	  
 	</div>
 

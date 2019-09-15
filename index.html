@@ -143,7 +143,8 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<h1 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h1><h2 id="物体移动和物理设置"><a href="#物体移动和物理设置" class="headerlink" title="物体移动和物理设置"></a>物体移动和物理设置</h2><h3 id="角色移动"><a href="#角色移动" class="headerlink" title="角色移动"></a>角色移动</h3><p>首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该<strong>去除重力</strong>并且<strong>冻结z坐标</strong>，以达到平面移动的目的。<br></p>
+		<p>unity3D入门，跑了个2D beginner的教学项目，总结下要点。</p>
+<h1 id="day-1-2"><a href="#day-1-2" class="headerlink" title="day 1-2"></a>day 1-2</h1><h2 id="物体移动和物理设置"><a href="#物体移动和物理设置" class="headerlink" title="物体移动和物理设置"></a>物体移动和物理设置</h2><h3 id="角色移动"><a href="#角色移动" class="headerlink" title="角色移动"></a>角色移动</h3><p>首先是游戏主体gameobject作为有位移属性transform，其中坐标由属性vector2的position定义。其次由于涉及碰撞所以加了硬体component和碰撞盒box colider，在colider中可以用edit设置碰撞范围（通常为底部一小部分）以及决定是否为trigger。为防止位移在物理碰撞中错位，使用每帧刷新前用物理坐标直接设置到position：rigidbody.movePosition来代替。同时在设置rigid后应该<strong>去除重力</strong>并且<strong>冻结z坐标</strong>，以达到平面移动的目的。<br></p>
 	
 	</div>
   <a type="button" href="/2019/09/02/gamedev1/#more" class="btn btn-default more">Read More</a>
@@ -399,15 +400,15 @@ library(ggplot2)
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
-		
-			<li><a href="/tags/gamedev/">gamedev<span>1</span></a></li>
-		
 			<li><a href="/tags/learn/">learn<span>1</span></a></li>
 		
 			<li><a href="/tags/R/">R<span>4</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/gamedev/">gamedev<span>1</span></a></li>
 		
 		 
 		</ul>
