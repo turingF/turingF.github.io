@@ -143,12 +143,23 @@ var _hmt = _hmt || [];
 <li>将sprite drag到hierarchy作为instance</li>
 <li>将instance拖入prefabs文件夹作为统一类管理，对instance的修改可通过override复写到prefabs里</li>
 </ul>
-<h2 id="Gird网格"><a href="#Gird网格" class="headerlink" title="Gird网格"></a>Gird网格</h2><p>在设置完物体后当然接下来就是画地图了。在hierarchy新建tilemap物体，这里需要加入rigid并且type设为static即禁止移动，同时使用tilemap colider的composite来忽略各个tile的间距而使其成为一个整体。设置好gird后接下来就是画图了，在window/tile palette画板上加入sprite。这里需要将一个sprite进行切割(since)，可在sprite的editor进行切割。OK。接下来就是画图了，create yourself:).把tilemap的图层设为-10表示位于最底层现实。之后为了能让ruby在地上跑，需要调整tilemap的碰撞域，在sprite中把地面的colider type设为none即可。</p>
-<h1 id="day-3-4"><a href="#day-3-4" class="headerlink" title="day 3-4"></a>day 3-4</h1><h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h2><p>接下来同理设置好了机器人和草莓的object。对于草莓，是个单纯的box colider，在人物撞击草莓时，草莓应该进行碰撞检测(OnTriggerEnter2D)。注意这里应该是两个box colider的撞击，所以应该是撞击物体也是collider，直接从中判断撞击中是否有RubbyController,即是否装上玩家。如果是则判断玩家是否是满血，如果不是调用其加血函数并销毁该草莓（消耗）。</p>
+<h2 id="Gird网格"><a href="#Gird网格" class="headerlink" title="Gird网格"></a>Gird网格</h2><p>在设置完物体后当然接下来就是画地图了。在hierarchy新建tilemap物体，这里需要加入rigid并且type设为static即禁止移动，同时使用tilemap colider的composite来忽略各个tile的间距而使其成为一个整体。设置好gird后接下来就是画图了，在window/tile palette画板上加入sprite。这里需要将一个sprite进行切割(since)，可在sprite的editor进行切割（ <strong>需要把sprite模式从single改为multiple</strong> ）。OK。接下来就是画图了，create yourself:).把tilemap的图层设为-10表示位于最底层现实。之后为了能让ruby在地上跑，需要调整tilemap的碰撞域，在sprite中把地面的colider type设为none即可。</p>
+<h1 id="day-3-4"><a href="#day-3-4" class="headerlink" title="day 3-4"></a>day 3-4</h1><h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h2><p>接下来同理设置好了机器人和草莓的object。对于草莓，是个单纯的box colider，在人物撞击草莓时，草莓应该进行碰撞检测(OnTriggerEnter2D)。注意这里应该是两个box colider的撞击，所以应该是撞击物体也是collider，直接从中判断撞击中是否有RubbyController,即是否装上玩家。如果是则判断玩家是否是满血，如果不是调用其加血函数并销毁该草莓（消耗）。而两个rigid撞击，比如ruby和robot的撞击属于Collision，其包含了所有撞击信息，可使用collision.gameObject来获取。</p>
 <p>同理在damage zoom里，也是box colider，不同的是应把撞击检测改为OnTriggerStay2D。但掉血是按帧判断的，所以血会瞬间掉没。所以给ruby设置了无敌时间，需要三个parm: 作为公共变量的timer以供设置无敌时间和计时器counter，和无敌状态invincible。在血量计算中应该使用Mathf.Clamp函数以控制在min-max之间。</p>
-<h2 id="script结构"><a href="#script结构" class="headerlink" title="script结构"></a>script结构</h2><p>总结下script的部分结构，start函数在创建该物体时调用一次，update是逐帧调用，要跟时间的话需要Time。deltaTime来辅助。awake函数是在唤醒时调用，在动态生成物体时(Instantiate)，start函数会在下一帧调用，所以需要awake函数。一般开头设置公共变量为总计量值供调整。可以使用GET等限制条件来控制外界对变量的访问权限。在Start主要是对一些内部控制变量初始化，比如当前HP，该object的rigid，animator等属性实例(GetComponent&lt;&gt;())。在Update中主要捕获输入进行移动，判断。最后就是功能函数，一般不设置访问权限以供外界获得controller实体后能够调用该功能函数。</p>
-<p>##</p>
-	  
+<h2 id="script结构"><a href="#script结构" class="headerlink" title="script结构"></a>script结构</h2><p>总结下script的部分结构，start函数在创建该物体时调用一次，主要在其中做变量的初始化。update是逐帧调用，。要跟时间的话需要Time。deltaTime来辅助。awake函数是在唤醒时调用，在动态生成物体时(Instantiate)，start函数会在下一帧调用，所以需要awake函数。一般开头设置公共变量为总计量值供调整。可以使用GET等限制条件来控制外界对变量的访问权限。在Start主要是对一些内部控制变量初始化，比如当前HP，该object的rigid，animator等属性实例(GetComponent&lt;&gt;())。在Update中主要捕获输入进行移动，判断。最后就是功能函数，一般不设置访问权限以供外界获得controller实体后能够调用该功能函数。</p>
+<h2 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h2><h3 id="动画播放"><a href="#动画播放" class="headerlink" title="动画播放"></a>动画播放</h3><p>画面的动画效果无疑是整个游戏舒畅度的关键环节。核心就是在不同触发条件下的动画(Animator)的切换条件。首先就是在project下建立Animation(最后拖到物体的Animator组分里)，使用CTRL+6打开Animation窗口，将sprite拖到里面，调整samples的值来改变每秒的播放帧数(4)，可使用flip.x来改变播放顺序。一个Animation里可能有多个状态。</p>
+<h3 id="Animator"><a href="#Animator" class="headerlink" title="Animator"></a>Animator</h3><p>Animation重点关注的是动画的播放，而Animator则关注动画的播放者。在ruby的component里加入Animator变量并拖入上述动画，之后就可以打开Animator窗口看到默认的State Machine(状态机器)。这里使用混合树(blend tree)数据结构来控制变量。设置两个参数（param）和四个状态(motion)，初始状态在(0,0)。根据设置(X,Y)的值来改变状态位置，状态会切换到离当前坐标最接近的状态。接来下就是用script来通过改变参数。同样使用animator变量</p>
+<pre><code>animator = GetComponent&lt;Animator&gt;(); //in Start
+</code></pre><p>这里接下来使用了move来截获GetAxis的向量，并直接在position移动中使用move向量移动：</p>
+<pre><code>position = position + move*speed*deltaTime;
+</code></pre><p>之后为了防止设置参数溢出，使用Normalize来单位化move并设置到animator的param里。</p>
+<h1 id="day-5-7"><a href="#day-5-7" class="headerlink" title="day 5-7"></a>day 5-7</h1><h2 id="射击-创造子弹"><a href="#射击-创造子弹" class="headerlink" title="射击(创造子弹)"></a>射击(创造子弹)</h2><p>接下来就是程序中创造一个gameobject的问题。首先还是用sprite创造prefabs。加入box colider和rigidbody（因为要使用phycial系统给它一个力让他移动,这里使用rigid.AddFore)。同时可以用position.magnitude的模长判断其离中心位置的距离，若超过范围则destroy。</p>
+<p>创造gameobject肯定需要一个类，所以在ruby中使用public变量来接收prefabs里的子弹类。使用Instantiate来在ruby面前创造一个子弹，再调用addForce让它自由移动。<strong>但子弹的start函数不会在这帧上调用，所以需要换成Awake</strong>。另外为了防止子弹不和ruby撞击，需要给子弹和ruby设置不同的layer，之后在project setting的碰撞矩阵中取消这两个layer的撞击。</p>
+<h2 id="Fix-Robot"><a href="#Fix-Robot" class="headerlink" title="Fix Robot"></a>Fix Robot</h2><p>接下来要求射击到的robot停止移动，首先是在controller中编写函数。主要实现两种状态：停止移动，可暂时用 return掉update函数。停止撞击判定，设置rigid.simulated为false。当然撞击判定是在子弹中进行的。</p>
+<p>之后设置fix动画效果。</p>
+<p>用sprite添加新的animation状态，在state machine里添加转换。首先在param里加入Trigger变量Fixed，并把其设为转换里的conditions里。接下来在fix函数中使用：</p>
+<pre><code>animator.SetTrigger(&quot;Fixed&quot;);
+</code></pre>	  
 	</div>
 
 	<div>
@@ -157,7 +168,8 @@ var _hmt = _hmt || [];
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2019/09/17/gamedev2/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
@@ -204,7 +216,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/gamedev/">gamedev<span>1</span></a></li>
+  <li><a href="/tags/gamedev/">gamedev<span>2</span></a></li>
     </ul>
 	</div>
 		
