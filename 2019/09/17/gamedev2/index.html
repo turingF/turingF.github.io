@@ -138,7 +138,7 @@ var _hmt = _hmt || [];
 <ul>
 <li>looping：循环生成，在一次lifetime后重新生成</li>
 <li>start lifetime/speed: 生产时间/速度，可设置为在区间内生成随机数来更在自然</li>
-<li>simulation space：local烟垂直向上，world烟跟在后面飘</li>
+<li>simulation space：local即特效不随物体移动，world模式下特效会随物体移动</li>
 </ul>
 </li>
 <li><p>Emission: brusts一次性生成多个sprite</p>
@@ -149,13 +149,20 @@ var _hmt = _hmt || [];
 <li>radius：生成半价</li>
 </ul>
 </li>
-<li><p>Color over lifetime: 上方alpha为透明度，下方为颜色属性</p>
+<li><p>Color over lifetime: 点击空白会产生一个渐变器，上方alpha为透明度，下方为颜色属性。左边是start状态，右边是end状态，这里吧end的alpha设为0(全透明)即可。</p>
 </li>
 <li><p>Size over lifetime： 改成递减曲线，以达到逐步变小</p>
 </li>
 <li><p><strong>Texture Sheet Animation</strong>: 将mode改为sprite以供用sprite显示特效，在之后的sprite里加入。使用radom随机生成两种烟雾sprite以更好地显示效果。</p>
 </li>
 </ul>
+<p>接下来就是如何把特效停止的问题。很简单从sprite的controller中设置公共变量</p>
+<pre><code>public ParticleSystem smokeEffect;
+</code></pre><p>之后将smokeEffect拖入这个slot即可。</p>
+<pre><code>这里值得注意的是smokeEffect是个有ParticleSystem的gameObject，而你吧它拖入了ParticleSystem变量槽里。这种简化的方法不仅方便了你不用去script里用GetComponent&lt;&gt;去找组成，也防止了gameObject里没有这个Component,总之是个很好用的方法。
+</code></pre><p>最后在Fixed function中使用Stop方法<em>自然地</em>停止特效。</p>
+<pre><code>smokeEffect.Stop(); //如果使用Destory(effect)，特效会立马消失
+</code></pre><p>同样地对于生成特效，先在script里把shootEffect drag到solt里，再使用Instantiating函数生成特效。</p>
 	  
 	</div>
 
