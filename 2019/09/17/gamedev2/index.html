@@ -9,7 +9,7 @@
   <title>gamedev2 | TuringF&#39;s blog</title>
   <meta name="author" content="turingF">
   
-  <meta name="description" content="week2 day 9-11摄像头设置在 Window &amp;gt; Package Manager里可加入新的包，这里加入cinemachine，为摄像头的功能包。在顶部 Cinemachine &amp;gt; Create 2D Camera可创建一个虚拟的摄像头Vitural camera,通常真实摄像头会在不同VC中切换以达到不同视角，这里2D单纯就一个视角即可。通常摄像头有两种视角：">
+  <meta name="description" content="week2 day 8-10摄像头设置在 Window &amp;gt; Package Manager里可加入新的包，这里加入cinemachine，为摄像头的功能包。在顶部 Cinemachine &amp;gt; Create 2D Camera可创建一个虚拟的摄像头Vitural camera,通常真实摄像头会在不同VC中切换以达到不同视角，这里2D单纯就一个视角即可。通常摄像头有两种视角：">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -127,7 +127,7 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="week2-day-9-11"><a href="#week2-day-9-11" class="headerlink" title="week2 day 9-11"></a>week2 day 9-11</h1><h2 id="摄像头设置"><a href="#摄像头设置" class="headerlink" title="摄像头设置"></a>摄像头设置</h2><p>在 Window &gt; Package Manager里可加入新的包，这里加入cinemachine，为摄像头的功能包。在顶部 Cinemachine &gt; Create 2D Camera可创建一个虚拟的摄像头Vitural camera,通常真实摄像头会在不同VC中切换以达到不同视角，这里2D单纯就一个视角即可。通常摄像头有两种视角：</p>
+	  <h1 id="week2-day-8-10"><a href="#week2-day-8-10" class="headerlink" title="week2 day 8-10"></a>week2 day 8-10</h1><h2 id="摄像头设置"><a href="#摄像头设置" class="headerlink" title="摄像头设置"></a>摄像头设置</h2><p>在 Window &gt; Package Manager里可加入新的包，这里加入cinemachine，为摄像头的功能包。在顶部 Cinemachine &gt; Create 2D Camera可创建一个虚拟的摄像头Vitural camera,通常真实摄像头会在不同VC中切换以达到不同视角，这里2D单纯就一个视角即可。通常摄像头有两种视角：</p>
 <p><img src="/2019/09/17/gamedev2/ctype.png" alt></p>
 <a id="more"></a>
 <p>这里因为是2D cinema所以自动是orthographic（直角）。摄像头的orthographic size通常设为整个height的一半以正好容纳整个画面(eg. 如果画面高度为20unit，则size设为10),而画面宽度根据比例 <em>4:3/16:9</em> 自动决定。</p>
@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
 </code></pre><p>最后在Fixed function中使用Stop方法<em>自然地</em>停止特效。</p>
 <pre><code>smokeEffect.Stop(); //如果使用Destory(effect)，特效会立马消失
 </code></pre><p>同样地对于生成特效，先在script里把shootEffect drag到solt里，再使用Instantiating函数生成特效。</p>
-	  
+<h1 id="week2-day11-12"><a href="#week2-day11-12" class="headerlink" title="week2 day11-12"></a>week2 day11-12</h1><h1 id="UI-Canvas"><a href="#UI-Canvas" class="headerlink" title="UI Canvas"></a>UI Canvas</h1>	  
 	</div>
 
 	<div>
