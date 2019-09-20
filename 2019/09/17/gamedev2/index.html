@@ -199,7 +199,18 @@ void Awake()
 }
 </code></pre><p>之后就可以在rubyController里使用：</p>
 <pre><code>UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
-</code></pre><h2 id="RayCasting（射线机制）"><a href="#RayCasting（射线机制）" class="headerlink" title="RayCasting（射线机制）"></a>RayCasting（射线机制）</h2>	  
+</code></pre><h2 id="RayCasting（射线机制）"><a href="#RayCasting（射线机制）" class="headerlink" title="RayCasting（射线机制）"></a>RayCasting（射线机制）</h2><p>首先创建NPC的sprite并设置好Animator，并加入box collider，将碰撞域设为中下部分。</p>
+<p>之后使用物理系统的射线机制，从一个点沿一个方向发射一定长度的射线，并判断是否有碰撞(hit).</p>
+<pre><code>RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask(&quot;NPC&quot;));
+if (hit.collider != null)
+{
+    Debug.Log(&quot;Raycast has hit the object &quot; + hit.collider.gameObject);
+}
+</code></pre><p>最后一个param是碰撞图层，我们把NPC单独放在一个layer以达到ray只会碰撞NPC层的物品(触发对话)。</p>
+<h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><p>对话框作为text，也是需要在canvas上显示，不同的是需要在触发对话后才能被激活。</p>
+<p>在sprite底下创造canvas，这里需要调成world space，通过设置position和scale来调成适当大小/位置。在canvas上加入全覆盖(ALT + stretch)的dialogUI图片，之后再创建子类TextMeshPro以显示文字。</p>
+<p>最后就是控制dialog的显示，同理给NPC一个script来控制，使用public获取canvas（gameObject）并使用SetActive函数来控制显示，同时需要Time.deltaTime和counter变量来计时。最后设置显示函数DisplayDialog来激活BOX和重置counter，每次使用raycasting在hit后调用DisplayDialog即可。</p>
+	  
 	</div>
 
 	<div>
