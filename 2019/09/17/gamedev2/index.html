@@ -176,13 +176,30 @@ var _hmt = _hmt || [];
 <li>Scale With Screen Size：根据实际分辨率调整</li>
 </ul>
 <p>这里使用简单的固定大小。</p>
-<h3 id="加入图片"><a href="#加入图片" class="headerlink" title="加入图片"></a>加入图片</h3><p><strong>在画布上的UI需要加在Canvas里作为子类</strong>，在选中canvas后创建image物体。</p>
+<hr>
+<p><strong>在画布上的UI需要加在Canvas里作为子类</strong>，在选中canvas后创建image物体。</p>
 <p>把sprite拖入image里即可，可以使用<em>Set Native Size</em>把image大小设为sprite原大小。使用T来调整image大小。把image拖到左上角，但这仅仅是snap到对应位置而不是place。</p>
 <p>所以接下来使用画布的锚Anchor的概念：</p>
 <p><img src="/2019/09/17/gamedev2/anchor.png" alt></p>
 <p>image的<strong>position</strong>是由anchor到pivot的向量决定的，所以当画面被resize时position会保持相同所以导致image超出整个画布的边界(border)。解决方案是将anchor放在同样的角落即可。</p>
-<p>设置好BAR的图片后，还要在BAR上加入角色图片和血量条。同样需要把他们设为BAR的子类。</p>
-	  
+<p>设置好BAR的图片后，还要在BAR上加入角色图片和血量条。同样需要把他们设为BAR的子类。我们希望在拉伸时保持图片局限在一个范围内，使用Rect Transform里的rect即可。</p>
+<p><img src="/2019/09/17/gamedev2/stretch.png" alt></p>
+<p>在设置healthBar时，需要使用mask。先使用一张空白的image覆盖到BAR的health部分，同时需要调整Pivot（蓝色小圈）到左边以供伸缩时以左边为支点。mask相当于给image一个隐藏范围。</p>
+<blockquote>
+<p>想要调整pivot需要把上方的center模式调整为pivot</p>
+</blockquote>
+<p>在mask里创建image即可，之后按住<strong>ALT</strong>后stretch图片就会变成填充。这样就可以把image充满mask。之后需要隐藏mask画布，在component里加入mask取消show mask即可。这样通过调整隐藏的mask就可以完成对填充的healthBar的伸缩。</p>
+<p>之后使用script的公共变量获取mask并调整其大小：</p>
+<pre><code>mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, originalSize * value);
+</code></pre><p>使用静态变量来完成全局变量：</p>
+<pre><code>public static UIHealthBar instance { get; private set; } //设置权限
+void Awake()
+{
+    instance = this;
+}
+</code></pre><p>之后就可以在rubyController里使用：</p>
+<pre><code>UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
+</code></pre><h2 id="RayCasting（射线机制）"><a href="#RayCasting（射线机制）" class="headerlink" title="RayCasting（射线机制）"></a>RayCasting（射线机制）</h2>	  
 	</div>
 
 	<div>
