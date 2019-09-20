@@ -159,11 +159,30 @@ var _hmt = _hmt || [];
 <p>接下来就是如何把特效停止的问题。很简单从sprite的controller中设置公共变量</p>
 <pre><code>public ParticleSystem smokeEffect;
 </code></pre><p>之后将smokeEffect拖入这个slot即可。</p>
-<pre><code>这里值得注意的是smokeEffect是个有ParticleSystem的gameObject，而你吧它拖入了ParticleSystem变量槽里。这种简化的方法不仅方便了你不用去script里用GetComponent&lt;&gt;去找组成，也防止了gameObject里没有这个Component,总之是个很好用的方法。
-</code></pre><p>最后在Fixed function中使用Stop方法<em>自然地</em>停止特效。</p>
+<blockquote>
+<p>这里值得注意的是smokeEffect是个有ParticleSystem的gameObject，而你吧它拖入了ParticleSystem变量槽里。这种简化的方法不仅方便了你不用去script里用GetComponent&lt;&gt;去找组成，也防止了gameObject里没有这个Component,总之是个很好用的方法。</p>
+</blockquote>
+<p>最后在Fixed function中使用Stop方法<em>自然地</em>停止特效。</p>
 <pre><code>smokeEffect.Stop(); //如果使用Destory(effect)，特效会立马消失
 </code></pre><p>同样地对于生成特效，先在script里把shootEffect drag到solt里，再使用Instantiating函数生成特效。</p>
-<h1 id="week2-day11-12"><a href="#week2-day11-12" class="headerlink" title="week2 day11-12"></a>week2 day11-12</h1><h1 id="UI-Canvas"><a href="#UI-Canvas" class="headerlink" title="UI Canvas"></a>UI Canvas</h1>	  
+<h1 id="week2-day11-12"><a href="#week2-day11-12" class="headerlink" title="week2 day11-12"></a>week2 day11-12</h1><h2 id="UI-Canvas-帆布"><a href="#UI-Canvas-帆布" class="headerlink" title="UI Canvas(帆布)"></a>UI Canvas(帆布)</h2><p>设计UI即显示一些文字图片信息，这里主要使用的概念是Canvas，即画布。在hierachy里创建一个Canvas，同时生成一个EventSystem。这里主要是Canvas的渲染属性：</p>
+<ul>
+<li>overlay: default,在游戏界面上方<strong>覆盖</strong>显示</li>
+<li>worldspace： 自由模式，通常用于3D</li>
+</ul>
+<p>尺寸属性有：</p>
+<ul>
+<li>Constant Size：固定大小</li>
+<li>Scale With Screen Size：根据实际分辨率调整</li>
+</ul>
+<p>这里使用简单的固定大小。</p>
+<h3 id="加入图片"><a href="#加入图片" class="headerlink" title="加入图片"></a>加入图片</h3><p><strong>在画布上的UI需要加在Canvas里作为子类</strong>，在选中canvas后创建image物体。</p>
+<p>把sprite拖入image里即可，可以使用<em>Set Native Size</em>把image大小设为sprite原大小。使用T来调整image大小。把image拖到左上角，但这仅仅是snap到对应位置而不是place。</p>
+<p>所以接下来使用画布的锚Anchor的概念：</p>
+<p><img src="/2019/09/17/gamedev2/anchor.png" alt></p>
+<p>image的<strong>position</strong>是由anchor到pivot的向量决定的，所以当画面被resize时position会保持相同所以导致image超出整个画布的边界(border)。解决方案是将anchor放在同样的角落即可。</p>
+<p>设置好BAR的图片后，还要在BAR上加入角色图片和血量条。同样需要把他们设为BAR的子类。</p>
+	  
 	</div>
 
 	<div>
