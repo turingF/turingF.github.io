@@ -219,7 +219,32 @@ if (hit.collider != null)
 <h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><p>对话框作为text，也是需要在canvas上显示，不同的是需要在触发对话后才能被激活。</p>
 <p>在sprite底下创造canvas，这里需要调成world space，通过设置position和scale来调成适当大小/位置。在canvas上加入全覆盖(ALT + stretch)的dialogUI图片，之后再创建子类TextMeshPro以显示文字。</p>
 <p>最后就是控制dialog的显示，同理给NPC一个script来控制，使用public获取canvas（gameObject）并使用SetActive函数来控制显示，同时需要Time.deltaTime和counter变量来计时。最后设置显示函数DisplayDialog来激活BOX和重置counter，每次使用raycasting在hit后调用DisplayDialog即可。</p>
-	  
+<h2 id="音频-Audio"><a href="#音频-Audio" class="headerlink" title="音频(Audio)"></a>音频(Audio)</h2><p>主体分为三部分：</p>
+<ul>
+<li>Audio Clips: 音片，即每个播放的音乐文件</li>
+<li>Audio Listener: 音频收听者，通常指camera</li>
+<li>Audio Source： 音频发起者</li>
+</ul>
+<h3 id="背景音乐"><a href="#背景音乐" class="headerlink" title="背景音乐"></a>背景音乐</h3><p>在hierarchy中创建一个source为BGM，设置其为LOOP,将Spatial Blend调为2D(<strong>即各处播放声音一样，与linster和source距离无关</strong>)。</p>
+<h3 id="简单音效"><a href="#简单音效" class="headerlink" title="简单音效"></a>简单音效</h3><p>在这里播放音效主要是用audioSource的内置函数playshot。将Source调为2D，发起音效大致为:</p>
+<p>先确定声音发起者，给其一个component：AudioSource。在发起者中start获取，之后便可以使用playshot来播放不同的clip。clip可由public变量从外部获取到script里，再由不同的判定场景来决定放哪个clip。</p>
+<pre><code>if(ruby is damaged) audioSource.playshot(damageAduioClip);
+if(ruby is healthed) audioSource.playshot(HealthAduioClip);
+</code></pre><h3 id="空间音效-Spatialization"><a href="#空间音效-Spatialization" class="headerlink" title="空间音效(Spatialization)"></a>空间音效(Spatialization)</h3><p>假设机器人走路会发出声音，而我们听到的脚步声会随距离听到的音量大小不同，则需要使用Spatialization。</p>
+<p>首先给机器人一个AudioSource,<strong>将Spatial Blend调为3D</strong>，就会出现最小声音范围的圈，即在圈内均为MAX音量。在3D setting中吧max distance调为10unit,即在10unit时会消退为0，在其中min-max范围内会逐步衰减。</p>
+<p>最后需要调整作为Listener的main camera(MC)，因为camera本来就在平面视角的上方(俯视视角)，当然camera随ruby移动我们边可以认为是ruby听到的。所以我们需要把camera在z=0的投影(即投在平面的位置)作为listener。在MC下创建子类listener将z=10即相对camera在下面10个unit正好是ruby平面。之后取消MC自己的listener。由于子类关系listener的移动会随着MC移动。</p>
+<h3 id="build-game"><a href="#build-game" class="headerlink" title="build game"></a>build game</h3><p>在project setting里设置图标，名字等属性后，可在build setting选好平台即可发布。</p>
+<h1 id="SUMMARY"><a href="#SUMMARY" class="headerlink" title="SUMMARY"></a>SUMMARY</h1><h2 id="tech-stack"><a href="#tech-stack" class="headerlink" title="tech stack"></a>tech stack</h2><p>开学两周内算是跑完了第一个demo，写的比较详细因为不懂嘛，基础还是要巩固下的。总的来说c#还是很简单的没什么特殊的，除了变量规定那边设置变量读取权限可能陌生些其他都是正常逻辑流程。总的来说这部分教程分为以下几步：</p>
+<ul>
+<li>如何将一(几)张图(sprite)通过分割后做成一个prefabs（也就是gameObject），记得设置好动画效果,在animator的state machine的设计。tilemap的画地图也很关键！ *</li>
+<li>script基本东西，像start/awake区别，如何设置只读变量(*)/公共变量，使用Time.deltaTime来计时，vector2和速度来控制移动，特别是向量的运算</li>
+<li>collider和rigidbody，以及关于碰撞域的设置，碰撞函数的灵活应用。之后也用到了物理系统的addForce来扔导弹,raycast来触发对话。</li>
+<li>如何编写受伤/加血以及其他事物的逻辑流程，特定的固有函数(Instantiate)还需要熟悉。 *（想起当年那个圣经）</li>
+<li>摄像头问题。如何跟着ruby走啊(Virtual Camera的follow)，如何固定摄像头的范围(VC的Confined Mode)</li>
+<li>UI问题，canvas的设置包括mask还是很复杂的，像图形变化时调整pivot和anchor来防止变形，还有他的rect Transform(边界范围)。</li>
+<li>特效那个一堆设置，audio的三要素(source放clip给listener)和空间音效（声音随距离减少）的设置</li>
+</ul>
+<h2 id="outlook"><a href="#outlook" class="headerlink" title="outlook"></a>outlook</h2>	  
 	</div>
 
 	<div>
