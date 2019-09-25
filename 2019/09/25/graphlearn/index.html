@@ -6,15 +6,16 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>我最近收听的音乐（Support in Aplayer） | TuringF&#39;s blog</title>
+  <title>graphlearn | TuringF&#39;s blog</title>
   <meta name="author" content="turingF">
   
-  <meta name="description" content>
+  <meta name="description" content="BOSS布置下来的任务就是熟悉redis和neo4j，在上面搭建kafka做相关运算。在MAC做相关项目的构建。redis是个键值数据库，neo4j是个图数据库，总之知识图谱就是在这两个上面搞的。
+搭建环境IDEA在官网上下载就好，tb上15买了个lecinse，顺便把pycharm和rider激活">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="我最近收听的音乐（Support in Aplayer）">
+  <meta property="og:title" content="graphlearn">
   <meta property="og:site_name" content="TuringF&#39;s blog">
 
   
@@ -61,9 +62,6 @@ var _hmt = _hmt || [];
 
 
 
-<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
-<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="/assets/js/Meting.min.js" class="meting-script-marker"></script>
 </head>
 </html>
 
@@ -114,9 +112,11 @@ var _hmt = _hmt || [];
   	<div class="content">
     	 
 
+
+
 	
 		<div class="page-header">
-			<h1> 我最近收听的音乐（Support in Aplayer）</h1>
+			<h1> graphlearn</h1>
 		</div>
 	
 
@@ -124,10 +124,11 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row page">
+<div class="row post">
 	<!-- cols -->
 	
-	<div class="col-md-12">
+	<div id="top_meta"></div>
+	<div class="col-md-9">
 	
 
 
@@ -136,13 +137,44 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  
-    <div id="aplayer-CQuohEtm" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="398693098" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>	  
+	  <p>BOSS布置下来的任务就是熟悉redis和neo4j，在上面搭建kafka做相关运算。在MAC做相关项目的构建。redis是个键值数据库，neo4j是个图数据库，总之知识图谱就是在这两个上面搞的。</p>
+<h1 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h1><p>IDEA在官网上下载就好，tb上15买了个lecinse，顺便把pycharm和rider激活了。neo4j从官网上down下来，配好java环境后，直接在neo4j/bin里使用：</p>
+<pre><code>./neo4j start
+</code></pre><p>之后在localhost上就可以进入neo4j数据库。</p>
+<p>redis同样下载后，先进入redis后make一下，在src中使用</p>
+<pre><code>./redis-server
+</code></pre><p>打开服务器，之后新建一个window使用</p>
+<pre><code>./redis-cli
+</code></pre><p>即可进入redis的交互界面。</p>
+<h1 id="redis小记"><a href="#redis小记" class="headerlink" title="redis小记"></a>redis小记</h1><p>redis里基本数据结构有var,list,set,sorted set和hash。</p>
+<pre><code>#var
+set vaule &quot;hello&quot;
+get value =&gt; hello
+empire value 120 # live time
+ttl value
+INCR a # a++
+
+#list
+lpush list 1 # from start insert
+rpush list 3 # end
+lrange list 0 -1 # from 0 to -1(end) to show
+</code></pre>	  
 	</div>
 
 	<div>
   	<center>
 	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/09/17/gamedev2/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
 
     
 </div>
@@ -152,9 +184,51 @@ var _hmt = _hmt || [];
 	
 	<!-- comment -->
 	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
 
 	</div> <!-- col-md-9/col-md-12 -->
 		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-09-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/redis/">redis<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
 		
 
 </div><!-- row -->
