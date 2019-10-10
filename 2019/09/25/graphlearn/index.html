@@ -6,16 +6,15 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>graphlearn | TuringF&#39;s blog</title>
+  <title>图数据库读书笔记1 | TuringF&#39;s blog</title>
   <meta name="author" content="turingF">
   
-  <meta name="description" content="BOSS布置下来的任务就是熟悉redis和neo4j，在上面搭建kafka做相关运算。在MAC做相关项目的构建。redis是个键值数据库，neo4j是个图数据库，总之知识图谱就是在这两个上面搞的。
-搭建环境IDEA在官网上下载就好，tb上15买了个lecinse，顺便把pycharm和rider激活">
+  <meta name="description" content="BOSS布置下来的任务就是熟悉redis和neo4j，在上面搭建kafka做相关运算。在MAC做相关项目的构建。redis是个键值数据库，neo4j是个图数据库，总之知识图谱就是在这两个上面搞的。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="graphlearn">
+  <meta property="og:title" content="图数据库读书笔记1">
   <meta property="og:site_name" content="TuringF&#39;s blog">
 
   
@@ -116,7 +115,7 @@ var _hmt = _hmt || [];
 
 	
 		<div class="page-header">
-			<h1> graphlearn</h1>
+			<h1> 图数据库读书笔记1</h1>
 		</div>
 	
 
@@ -138,27 +137,61 @@ var _hmt = _hmt || [];
 	  		
 
 	  <p>BOSS布置下来的任务就是熟悉redis和neo4j，在上面搭建kafka做相关运算。在MAC做相关项目的构建。redis是个键值数据库，neo4j是个图数据库，总之知识图谱就是在这两个上面搞的。</p>
+<a id="more"></a>
 <h1 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h1><p>IDEA在官网上下载就好，tb上15买了个lecinse，顺便把pycharm和rider激活了。neo4j从官网上down下来，配好java环境后，直接在neo4j/bin里使用：</p>
 <pre><code>./neo4j start
 </code></pre><p>之后在localhost上就可以进入neo4j数据库。</p>
-<p>redis同样下载后，先进入redis后make一下，在src中使用</p>
+<p>redis同样下载后但复杂点，先进入redis后make一下，在src中使用</p>
 <pre><code>./redis-server
 </code></pre><p>打开服务器，之后新建一个window使用</p>
 <pre><code>./redis-cli
 </code></pre><p>即可进入redis的交互界面。</p>
-<h1 id="redis小记"><a href="#redis小记" class="headerlink" title="redis小记"></a>redis小记</h1><p>redis里基本数据结构有var,list,set,sorted set和hash。</p>
+<h1 id="redis小记"><a href="#redis小记" class="headerlink" title="redis小记"></a>redis小记</h1><p>redis是一种分布式的基于键值对的数据库，基本数据结构有var,list,set,sorted set和hash,一下为tutorial里的基本函数：</p>
 <pre><code>#var
 set vaule &quot;hello&quot;
 get value =&gt; hello
 empire value 120 # live time
-ttl value
+ttl value # -1 for all-ttl, -2 for non-key
 INCR a # a++
 
 #list
 lpush list 1 # from start insert
 rpush list 3 # end
+rpush list 2
+rpop list
 lrange list 0 -1 # from 0 to -1(end) to show
-</code></pre>	  
+llen list 
+
+#set
+sadd set &quot;a1&quot;
+sadd set &quot;b1&quot;
+sadd set &quot;c1&quot;
+srem set &quot;a1&quot; # remove
+smembers set # show all
+sismember set &quot;b1&quot; # 1 for true
+
+
+#sorted set
+zadd sset 1 &quot;a&quot;
+zadd sset 3 &quot;b&quot;
+zadd sset 2 &quot;c&quot;
+zrange sset 0 -1 # a c b
+
+#hashes，给一个属性设置多个键值对
+hset user name &quot;xy&quot;
+hset user school &quot;hust&quot;
+hget user name =&gt; xy
+hset user visit 1
+hincrby user visit 10 # 1+10 = 11
+</code></pre><h1 id="neo4j小记"><a href="#neo4j小记" class="headerlink" title="neo4j小记"></a>neo4j小记</h1><p>neo4j是一个图的数据库，其通过创建和node和relative来构建图，完成一些子图查询的功能。</p>
+<p>其核心有节点和关系两个概念。节点有label和各种键值对作为属性，关系里也可以包含方向或属性。其基本语法有：</p>
+<pre><code>create(node1:Label {k1:v1 , k2:v2}) return node1
+create(node1) - [:related {p1:v1}] -&gt;(node2) return node1,related,node2
+</code></pre><p>可加入~进入模糊匹配，如找到joe的S开头的朋友：</p>
+<pre><code>match (user {name : &quot;joe&quot;}) - [:friends] -&gt; (follow) where follow.name=~ &apos;S.*&apos; return follow.name
+</code></pre><p>另外SET可以设置属性值和标签，而MERGE可以匹配或创建新节点。</p>
+<h1 id="IDEA集成"><a href="#IDEA集成" class="headerlink" title="IDEA集成"></a>IDEA集成</h1><p>IDEA中自动有spring Initer的选项来使用spring boot，进而集成neo4j与redis。虽然之前javaweb中只接触到了MVC和servlet，还没有碰过spring框架，所以在集成前先补了一波spring的坑，学了波spring boot。</p>
+	  
 	</div>
 
 	<div>
@@ -167,7 +200,8 @@ lrange list 0 -1 # from 0 to -1(end) to show
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2019/10/10/gamedev3/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
@@ -214,7 +248,7 @@ lrange list 0 -1 # from 0 to -1(end) to show
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/redis/">redis<span>1</span></a></li>
+  <li><a href="/tags/learn/">learn<span>2</span></a></li>
     </ul>
 	</div>
 		

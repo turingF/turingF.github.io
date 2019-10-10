@@ -6,15 +6,15 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>我最近收听的音乐（Support in Aplayer） | TuringF&#39;s blog</title>
+  <title>gamedev3 | TuringF&#39;s blog</title>
   <meta name="author" content="turingF">
   
-  <meta name="description" content>
+  <meta name="description" content="抽时间终于是过完了roguelike的一个项目，相比于前面的single move，这里牵扯了很多核心概念，像gamemanager,time/frame,move等。当然C#的stack也有很多，像函数的模板，携程等。这里主要对该项目的具体代码逻辑，时间设置的安排，以及涉及到的C#的新语法做一总结。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="我最近收听的音乐（Support in Aplayer）">
+  <meta property="og:title" content="gamedev3">
   <meta property="og:site_name" content="TuringF&#39;s blog">
 
   
@@ -61,9 +61,6 @@ var _hmt = _hmt || [];
 
 
 
-<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
-<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="/assets/js/Meting.min.js" class="meting-script-marker"></script>
 </head>
 </html>
 
@@ -114,9 +111,11 @@ var _hmt = _hmt || [];
   	<div class="content">
     	 
 
+
+
 	
 		<div class="page-header">
-			<h1> 我最近收听的音乐（Support in Aplayer）</h1>
+			<h1> gamedev3</h1>
 		</div>
 	
 
@@ -124,10 +123,11 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row page">
+<div class="row post">
 	<!-- cols -->
 	
-	<div class="col-md-12">
+	<div id="top_meta"></div>
+	<div class="col-md-9">
 	
 
 
@@ -136,13 +136,43 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
+	  <p>抽时间终于是过完了roguelike的一个项目，相比于前面的single move，这里牵扯了很多核心概念，像gamemanager,time/frame,move等。当然C#的stack也有很多，像函数的模板，携程等。这里主要对该项目的具体代码逻辑，时间设置的安排，以及涉及到的C#的新语法做一总结。</p>
+<a id="more"></a>
+<h1 id="代码主逻辑"><a href="#代码主逻辑" class="headerlink" title="代码主逻辑"></a>代码主逻辑</h1><p>player每次移动到exit到下一关，移动会消耗food，food为0时game over。过程中会遇到敌人(碰到会消耗food)，以及路障Wall，路障通常会很多，可以通过消耗turn(and food)来破坏。grid也会出现food来补充food。</p>
+<h2 id="项目模块"><a href="#项目模块" class="headerlink" title="项目模块"></a>项目模块</h2><ul>
+<li>BoardManager 生成随机地图和item</li>
+<li>GameManager* 使用单例模式管理不同scence间的信息传递(food)以及控制主流程</li>
+<li>MovingObject 可移动物体的泛类</li>
+<li>Loader 给摄像机的script，用于生成gamemanager</li>
+<li>Wall 由于墙破坏要更改sprite</li>
+</ul>
+<h2 id="BoardManager"><a href="#BoardManager" class="headerlink" title="BoardManager"></a>BoardManager</h2><p>由于Random.range涉及到大量min-max，设置Count类来统一管理。具体分布如下:</p>
+<p><img src="/2019/10/10/gamedev3/grid.jpg" alt></p>
+<p>我们需要设置各种列表：</p>
+<pre><code>public GameObject[] floorTiles;
+public GameObject[] foodTiles;
+public GameObject[] wallTiles;
+public GameObject[] outerWallTiles;
+public GameObject[] enemyTiles;
+</code></pre><p>列表具体需要从prefabs导入。主要先单独设立item生成区grid(List Vector)，使用Instantiate来生成sprite。先铺地板和外墙，再随机在grid中生成路障和food，敌人（每次randomPosition完后remove掉位置放置生成同一区域）。</p>
+<h2 id="GameManager"><a href="#GameManager" class="headerlink" title="GameManager"></a>GameManager</h2><p>使用static来进行单例模式instance，使用内置函数DontDestoryOnLoad来放置scence消失时的破坏.之后调用boardManager来绘制grid。但在这之前需要有一个关卡介绍，使用Canvas上渲染Image和text。这里也要使用doingSetup变量来防止在set时被update执行。在setActivity了image和更改了text，画面停留时间使用Invoke函数来调用hideCanvas来控制。这里还储存了enemy的列表，boardManager此时生成了enemy，enemy在生成时script的start里将该类加入到该列表。最后在update中，当玩家和敌人都未移动时，即可调用enemymove移动。</p>
 	  
-    <div id="aplayer-cnQMsVot" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="398693098" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>	  
 	</div>
 
 	<div>
   	<center>
 	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/09/25/graphlearn/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
 
     
 </div>
@@ -152,9 +182,51 @@ var _hmt = _hmt || [];
 	
 	<!-- comment -->
 	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
 
 	</div> <!-- col-md-9/col-md-12 -->
 		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-10-10 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/gamedev/">gamedev<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
 		
 
 </div><!-- row -->

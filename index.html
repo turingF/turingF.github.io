@@ -137,7 +137,34 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2019/09/25/graphlearn/" >graphlearn</a>
+			<a href="/2019/10/10/gamedev3/" >gamedev3</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2019-10-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>抽时间终于是过完了roguelike的一个项目，相比于前面的single move，这里牵扯了很多核心概念，像gamemanager,time/frame,move等。当然C#的stack也有很多，像函数的模板，携程等。这里主要对该项目的具体代码逻辑，时间设置的安排，以及涉及到的C#的新语法做一总结。</p>
+	
+	</div>
+  <a type="button" href="/2019/10/10/gamedev3/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2019/09/25/graphlearn/" >图数据库读书笔记1</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -152,27 +179,6 @@ var _hmt = _hmt || [];
 	
 	
 		<p>BOSS布置下来的任务就是熟悉redis和neo4j，在上面搭建kafka做相关运算。在MAC做相关项目的构建。redis是个键值数据库，neo4j是个图数据库，总之知识图谱就是在这两个上面搞的。</p>
-<h1 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h1><p>IDEA在官网上下载就好，tb上15买了个lecinse，顺便把pycharm和rider激活了。neo4j从官网上down下来，配好java环境后，直接在neo4j/bin里使用：</p>
-<pre><code>./neo4j start
-</code></pre><p>之后在localhost上就可以进入neo4j数据库。</p>
-<p>redis同样下载后，先进入redis后make一下，在src中使用</p>
-<pre><code>./redis-server
-</code></pre><p>打开服务器，之后新建一个window使用</p>
-<pre><code>./redis-cli
-</code></pre><p>即可进入redis的交互界面。</p>
-<h1 id="redis小记"><a href="#redis小记" class="headerlink" title="redis小记"></a>redis小记</h1><p>redis里基本数据结构有var,list,set,sorted set和hash。</p>
-<pre><code>#var
-set vaule &quot;hello&quot;
-get value =&gt; hello
-empire value 120 # live time
-ttl value
-INCR a # a++
-
-#list
-lpush list 1 # from start insert
-rpush list 3 # end
-lrange list 0 -1 # from 0 to -1(end) to show
-</code></pre>
 	
 	</div>
   <a type="button" href="/2019/09/25/graphlearn/#more" class="btn btn-default more">Read More</a>
@@ -413,38 +419,6 @@ library(ggplot2)
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2019/01/16/R-firstday/" >R_firstday</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2019-01-16  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="R基本函数"><a href="#R基本函数" class="headerlink" title="R基本函数"></a>R基本函数</h1><h2 id="写入-读取文件"><a href="#写入-读取文件" class="headerlink" title="写入/读取文件"></a>写入/读取文件</h2><pre><code>mydata &lt;- write/read.table/csv (file = , header = )
-</code></pre><h2 id="帮助函数"><a href="#帮助函数" class="headerlink" title="帮助函数"></a>帮助函数</h2><ol>
-<li>F1</li>
-<li>example</li>
-<li>demo</li>
-</ol>
-	
-	</div>
-  <a type="button" href="/2019/01/16/R-firstday/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -454,6 +428,16 @@ library(ggplot2)
 		<div class="pagination">
 
    
+    
+           <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+        
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/2/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
 </div>
 
   		</center>
@@ -489,17 +473,15 @@ library(ggplot2)
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/learn/">learn<span>1</span></a></li>
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/learn/">learn<span>2</span></a></li>
+		
+			<li><a href="/tags/gamedev/">gamedev<span>3</span></a></li>
 		
 			<li><a href="/tags/python/">python<span>1</span></a></li>
 		
-			<li><a href="/tags/gamedev/">gamedev<span>2</span></a></li>
-		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
-		
 			<li><a href="/tags/R/">R<span>4</span></a></li>
-		
-			<li><a href="/tags/redis/">redis<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -513,7 +495,11 @@ library(ggplot2)
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2019/09/25/graphlearn/" ><i class="fa fa-file-o"></i>graphlearn</a>
+        <a href="/2019/10/10/gamedev3/" ><i class="fa fa-file-o"></i>gamedev3</a>
+      </li>
+    
+      <li>
+        <a href="/2019/09/25/graphlearn/" ><i class="fa fa-file-o"></i>图数据库读书笔记1</a>
       </li>
     
       <li>
@@ -526,10 +512,6 @@ library(ggplot2)
     
       <li>
         <a href="/2019/08/10/list-section/" ><i class="fa fa-file-o"></i>list-slice</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/09/git-learn/" ><i class="fa fa-file-o"></i>git-learn</a>
       </li>
     
   </ul>
