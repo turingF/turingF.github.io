@@ -155,7 +155,13 @@ public GameObject[] wallTiles;
 public GameObject[] outerWallTiles;
 public GameObject[] enemyTiles;
 </code></pre><p>列表具体需要从prefabs导入。主要先单独设立item生成区grid(List Vector)，使用Instantiate来生成sprite。先铺地板和外墙，再随机在grid中生成路障和food，敌人（每次randomPosition完后remove掉位置放置生成同一区域）。</p>
-<h2 id="GameManager"><a href="#GameManager" class="headerlink" title="GameManager"></a>GameManager</h2><p>使用static来进行单例模式instance，使用内置函数DontDestoryOnLoad来放置scence消失时的破坏.之后调用boardManager来绘制grid。但在这之前需要有一个关卡介绍，使用Canvas上渲染Image和text。这里也要使用doingSetup变量来防止在set时被update执行。在setActivity了image和更改了text，画面停留时间使用Invoke函数来调用hideCanvas来控制。这里还储存了enemy的列表，boardManager此时生成了enemy，enemy在生成时script的start里将该类加入到该列表。最后在update中，当玩家和敌人都未移动时，即可调用enemymove移动。</p>
+<h2 id="GameManager"><a href="#GameManager" class="headerlink" title="GameManager"></a>GameManager</h2><p>使用static来进行单例模式instance，使用内置函数DontDestoryOnLoad来放置scence消失时的破坏.之后调用boardManager来绘制grid。但在这之前需要有一个关卡介绍，使用Canvas上渲染Image和text。这里也要使用doingSetup变量来防止在set时被update执行。在setActivity了image和更改了text，画面停留时间使用Invoke函数来调用hideCanvas来控制。这里还储存了enemy的列表，boardManager此时生成了enemy，enemy在生成时script的start里将该类加入到该列表。最后在update中，当玩家和敌人都未移动时，即可调用enemymove移动。同时需要设置一个turndelay(0.1s)来在playerturn和enemymove间切换。</p>
+<p>每个moveObject都有一个moveTime，代表了一个移动的移动时间。但是调用移动函数moveTowards的maxDelta设为deltaTime/move。每次move后有一个回合等待延时turnDelay.</p>
+<p>值得一提的是，OnCantMove是针对不同prefabs的互动，他在判断AttemptMove后调用。因为rigid两物体碰撞不能直接用trigger判断状态，故只能用hit到的物体强转成规定物体然后调用hit物体的函数(player调用wall的walldmg,enemy调用player的playerDmg)。</p>
+<h1 id="C-techstack"><a href="#C-techstack" class="headerlink" title="C# techstack"></a>C# techstack</h1><ul>
+<li>&lt;\T&gt;(T test) where T : parent : where规定了模板T必须继承自parent</li>
+<li></li>
+</ul>
 	  
 	</div>
 
@@ -165,7 +171,8 @@ public GameObject[] enemyTiles;
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2019/10/21/gameTest1/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
@@ -212,7 +219,7 @@ public GameObject[] enemyTiles;
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/gamedev/">gamedev<span>3</span></a></li>
+  <li><a href="/tags/gamedev/">gamedev<span>4</span></a></li>
     </ul>
 	</div>
 		
