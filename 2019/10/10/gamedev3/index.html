@@ -158,10 +158,13 @@ public GameObject[] enemyTiles;
 <h2 id="GameManager"><a href="#GameManager" class="headerlink" title="GameManager"></a>GameManager</h2><p>使用static来进行单例模式instance，使用内置函数DontDestoryOnLoad来放置scence消失时的破坏.之后调用boardManager来绘制grid。但在这之前需要有一个关卡介绍，使用Canvas上渲染Image和text。这里也要使用doingSetup变量来防止在set时被update执行。在setActivity了image和更改了text，画面停留时间使用Invoke函数来调用hideCanvas来控制。这里还储存了enemy的列表，boardManager此时生成了enemy，enemy在生成时script的start里将该类加入到该列表。最后在update中，当玩家和敌人都未移动时，即可调用enemymove移动。同时需要设置一个turndelay(0.1s)来在playerturn和enemymove间切换。</p>
 <p>每个moveObject都有一个moveTime，代表了一个移动的移动时间。但是调用移动函数moveTowards的maxDelta设为deltaTime/move。每次move后有一个回合等待延时turnDelay.</p>
 <p>值得一提的是，OnCantMove是针对不同prefabs的互动，他在判断AttemptMove后调用。因为rigid两物体碰撞不能直接用trigger判断状态，故只能用hit到的物体强转成规定物体然后调用hit物体的函数(player调用wall的walldmg,enemy调用player的playerDmg)。</p>
-<h1 id="C-techstack"><a href="#C-techstack" class="headerlink" title="C# techstack"></a>C# techstack</h1><ul>
-<li>&lt;\T&gt;(T test) where T : parent : where规定了模板T必须继承自parent</li>
-<li></li>
+<h2 id="C-techstack"><a href="#C-techstack" class="headerlink" title="C# techstack"></a>C# techstack</h2><ul>
+<li>&lt;\T&gt;(T test) where T:parent : where规定了模板T必须继承自parent</li>
+<li>invoke() 调用一个iterable类型的函数，其可以在delay一个timer后再调用该函数</li>
 </ul>
+<h2 id="My-Game-design"><a href="#My-Game-design" class="headerlink" title="My Game design"></a>My Game design</h2><p>当然搞了那么多教程，最后肯定要亲手把这些碎片拼成一个自己的demo。</p>
+<h3 id="大体流程"><a href="#大体流程" class="headerlink" title="大体流程"></a>大体流程</h3><p>参考的是我最喜欢的GBA游戏[MEGAMAN EXE2],大体流程如下<img src="/2019/10/10/gamedev3/demo1.jpg" alt></p>
+<p>大体是双人竞技的棋类对战游戏，</p>
 	  
 	</div>
 
