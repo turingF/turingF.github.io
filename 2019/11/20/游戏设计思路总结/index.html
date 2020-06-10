@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>游戏设计思路总结 | TuringF&#39;s blog</title>
+  <meta name="author" content="turingF">
+  
+  <meta name="description" content="前言虽然有句箴言:”永远不要把剧情放在核心玩法之前，把设计放在实现思路之前”。是的，天马行空固然奇思妙想，但终究是纸上谈兵。但！设计环节永远比实现有趣的多，本人之前就对心理学很有兴趣，大学期间举办过像多重人格，谎言分析等心理沙龙，也写过一篇关于瘾的文章。自认为也在很多游戏过程中思考过趣味性的产生和分">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="游戏设计思路总结">
+  <meta property="og:site_name" content="TuringF&#39;s blog">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+</html>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TuringF&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/Categories" title="Online Game.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/playlist" title="music list">
+			  <i class=""></i>Playlist
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/About" title="About me.">
+			  <i class=""></i>About me
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+	
+		<div class="page-header">
+			<h1> 游戏设计思路总结</h1>
+		</div>
+	
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>虽然有句箴言:”永远不要把剧情放在核心玩法之前，把设计放在实现思路之前”。是的，天马行空固然奇思妙想，但终究是纸上谈兵。但！设计环节永远比实现有趣的多，本人之前就对心理学很有兴趣，大学期间举办过像多重人格，谎言分析等心理沙龙，也写过一篇关于<a href="https://zhuanlan.zhihu.com/p/43632443" target="_blank" rel="noopener">瘾</a>的文章。自认为也在很多游戏过程中思考过趣味性的产生和分析，为此也在很多方面做了记录，在此做以汇总。</p>
+<h1 id="2019-10初"><a href="#2019-10初" class="headerlink" title="2019.10初"></a>2019.10初</h1><h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>to the moon感悟，一首<a href="https://www.bilibili.com/video/av65996453" target="_blank" rel="noopener">原创歌曲</a></p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>emmm，现在看来这是一个情感类的思考问题，大体思路应该是设计一个悲情故事，最好是结合自己的经历。但一个故事是不能完全与真实一一映射的，所谓艺术必须要高于生活，意味着你需要对人物设计适当<strong>夸张化</strong>，比如需要对某些人物的性格过度化，即使你映射的人现实中也许会缓和很多。更为甚者，你可以引入”死亡“的概念，其实有的时候过于平缓化会让玩家失去玩下去的动力，我觉得适当的突兀感会达到很好的效果。比如前面一直都是欢快的剧情中突然引入一段不寻常的死亡或崩坏，虽然这样引起了整体氛围的变化让玩家可能很不舒服，但这就是夸张啊。其次剧情设计是需要借物抒情的，往往你突出的一个剧情核心并让玩家以此感叹世事无常(物是人非),比如去月球的橄榄叶，鸭嘴兽；视频里的向日葵等等。</p>
+<h2 id="当时的正文"><a href="#当时的正文" class="headerlink" title="当时的正文"></a>当时的正文</h2><p>（emmm当时是想啥写啥的，现在看看确实很唠叨也不完整）</p>
+<p>节奏：</p>
+<p>沉寂 温热 美好 ～ 淡愁 矛盾 妥协 变味 别离 </p>
+<p>倒叙是个好手法，注重不同时间线的切换，不然会让playe腻味，只想刷剧情了<br>以及插入适当的幽默</p>
+<p>但切换时间线真的只有回忆的手法吗？</p>
+<p>主题：</p>
+<p>校园/生活 心理学 策略</p>
+<p>游戏时常：30min-1h</p>
+<p>ex：<br>时间穿梭  -&gt; 镜子（借物） -&gt; </p>
+<p>后悔遗憾 IF I HAVE XXX</p>
+<p>（重要）借物：</p>
+<p>向日葵（夏天） 纸鹤 星空 贴纸 下雨 票根</p>
+<p>美好的事物： 月亮 </p>
+<p>SIMPLE：</p>
+<p>突兀感：不是所有的事都需要顺从道德正确。有时候适时的背德感或情绪失控会让player印象深刻，比如 <em>对待好朋友错误行为漠视 </em>对B接触机会的淡然</p>
+<p>高潮：</p>
+<p>1 3 5 8 </p>
+<p>穿越人海，森林深海，日出日落</p>
+<p>Key mind:</p>
+<p>遇事需勇敢<br> 有时需要残忍拒绝<br>被现实高压力的压迫？</p>
+<p>体验：</p>
+<p>因错过而带来的伤感？<br>因wisdom选择而带来的不同感？</p>
+<p>人物：</p>
+<p>（A）：男一，内向，擅长思考。喜欢归结生活中的一些心理学现象（可以加入心理学纸条作为收集要素或提示要素），精英意识其实暗自也下了努力（暗杀教室那个红发）。小时候有遗憾。</p>
+<p>（B）：女一，热情开朗善良，小时候因一次事件无意冲破了A的心房，其实本身对A没什么特殊感觉。聪明有知性，英语很好。</p>
+<p>可以渲染A的独自努力和爱慕之情，但中途被D抢先告白并接受，从而获得突兀感（动力炉折磨）。</p>
+<p>这里可以阐释下恋爱心理是怎么形成的？其实这种爱慕都源自很小的一件细节，在自我心理成长中将这种瘙痒不断自我填充，其实谁也不知道为什么会喜欢上另一个人。只是你大脑得到了一直刺激下得到满足后你会有很强的满足感（就是舔狗的原理，可以加入第一章）。</p>
+<p>张楠（C）：A的好基友，情商很高，阳光爱运动。拥有着完美的生活，作为全局的标准。</p>
+<p>超能力者：</p>
+<p>主线：</p>
+<p>Ch0: 1.引言 2.寓言，以卡通（动物,剪纸风）的故事来描述整个故事的核心，核心为心理学和人性 3.话题，需要适度玩梗，但需要带出自己的新梗以供player后续讨论</p>
+<p>Ch1: 1.倒叙，一开始进入的是最后的时间线，</p>
+<p>心理：到底什么是人际关系？</p>
+<p>传统：</p>
+<p>1.自卑 初识 2.打破心理防线：害怕 未知 3.委婉 探索</p>
+<pre><code>主线1： 4.告白，恋爱 5.生活，矛盾 6.沉积的裂缝，妥协 7.冷暴力，变味 8.离别
+主线2： 4.暗恋，守护 5.岔开，偶遇 6.奋斗，感慨 7.再遇，无言 8.告白，结束
+主线3： 4.互相喜欢，没人捅破 5.一起升学，尝试交流 6.挑逗，使坏 7.暗中对她好，安慰
+
+    主线3.1：8.被她发现，敞开心扉 9.串线，解开1线一些细节的原因，即隔阂原因，防止冲突发生 10.和平发展，和平分手
+    主线3.2： 8.没被她发现，默默付出 9.身为好朋友继续发展 10.串线，再遇时感叹的更多，回忆过去
+        主线3.2.1： 11.告白被拒，回到2.8
+        主线3.2.2： 11.没有告白，以朋友身份继续之后生活，默默守护
+主线EX： 4.
+</code></pre><p>复线：1.朋友C的救赎之路 2.朋友D的健康生活 3.朋友E的志趣相投</p>
+<p>选择其中一条即可，后续sl重来？还是将各线穿在一起以供读者从横向比较各个选择带来的不同结果？</p>
+<p>过于日常的生活确实很难有很强的艺术感，需要使用一些脱离均衡或夸张（放大）的手法来描述生活，这里就需要使用借物的手法，通过渲染对某个事物的故事来侧面刻画生活中的关系，这样才会更自然地被player接受。</p>
+<p>艺术加工：</p>
+<ol>
+<li>反视角观念，给予反对话概念（战斗）。eg. 如果知道player会重新选择才能到的道路就可以设置在假定palyer已经重来的情况下设置对话 eg2. 把玩家想象成一个敌人，拥有的能力是无限S/L。(UT)</li>
+</ol>
+<p>幽默环节插入(cool):</p>
+<p>Sans:懒散 幽默 </p>
+<p>Tittle: TRICK(诡计) / IF I BRAVE ENOUGH / WHERE IS LOVE</p>
+<p>Chapter0: </p>
+<p>希望本无所谓有，无所谓无的，就如地上的路。其实地上本没有路，走的人多了，也便成了路。 -鲁迅</p>
+<p>是啊，捷径也不过是开始走的路罢了。。。</p>
+<p>—寓言故事插入：什么是框架，跳出既定框架—</p>
+<p>Chapter1:</p>
+<p>pm5:00 昏暗的房间中A从床上爬起，呆呆看着镜中的自己，沉思。</p>
+<p>手边手机突然亮了，来自XXX（模糊）的QQ提醒，懒得打开看。</p>
+<p>下楼去冰箱拿了点吃的，（窗外）传来了口琴声。渐渐地，场景模糊。<br>——<br>醒来，发现房间已经黑透了。手机里看了看是0条通话0条短信（和上文伏笔），无聊中选择继续上楼睡觉。路过伫立在床边的镜子前，，，</p>
+<h1 id="2019年11月初"><a href="#2019年11月初" class="headerlink" title="2019年11月初"></a>2019年11月初</h1><h2 id="初衷-1"><a href="#初衷-1" class="headerlink" title="初衷"></a>初衷</h2><p>贤者时间中对人生一些满足感的思考，以及看动漫时的一些思考。</p>
+<h2 id="想法-1"><a href="#想法-1" class="headerlink" title="想法"></a>想法</h2><p>顺从社会压力的表现形式，留白的使用技巧。</p>
+<h2 id="当时的正文-1"><a href="#当时的正文-1" class="headerlink" title="当时的正文"></a>当时的正文</h2><h3 id="归属"><a href="#归属" class="headerlink" title="归属"></a>归属</h3><p>归属 认同从小时候就开始，就像老师送小红花那样，我们渴望被认可被表扬，即使我们以为自己是一个心智成熟的成年人。</p>
+<p>很多时候我们都被现有的概念构建的局部世界里生活，交际，奋斗，挣扎；我们似乎刻意在淡却人生的意义本身，我们不敢去思考很多事情真正背后的运行或意义，因为那是无用且可怕的，即使我们知道自己仅仅是在被利用或被压榨，我们的努力也仅仅是被那些操纵者成为茶余饭后的闲谈罢了。但是，我们封闭了自己的认识局限，这让我们舒适。</p>
+<p>进入贤者时间仔细考虑，其实人生可以被很好地概括。每个大的年龄有它本身的宏观任务外，生活无疑是工作，社交，娱乐罢了。工作中我们去追求更好的条件，社交中我们追求异性或处于一个团队的认同亦或是一群兄弟，娱乐我们为了去打发零碎时间，去接触广义上的一些人或事（八卦）以去投影我们现实世界的不顺，去用那种虚伪的人格魅力来麻痹我们自己的无能。这就是人生，不过如此。</p>
+<h3 id="留白"><a href="#留白" class="headerlink" title="留白"></a>留白</h3><p>留白：最典型的就是电影或小说将结尾设置成开放式的，让读者畅想最后的结局，以达到提升作品的整体水平。当然留白不一定放在结尾，其实我看过很多的日本漫画都把留白放在了剧情中甚至是核心剧情中，它也不同与开放式结尾的表现，它是一种乍一看你会看不明白，但不影响剧情走向的体现，就是把很多东西留给读者自己悟或让读者读原著看到更多细节。比如说命运石之门，，。幻界战线中，，，</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/11/01/OSINT/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-11-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/gamedev/">gamedev<span>4</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+
+  
+  <div class="container-narrow">
+  <footer> <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div>
+<p>
+  &copy; 2019 turingF
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> ,
+      <br> THANKS FOR YOUR VISITING :).
+</p>
+
+
+<span id="busuanzi_container_site_pv">
+  <br>
+  不算子统计总浏览量：<span id="busuanzi_value_site_uv"></span>次
+</span>
+
+
+
+</div>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
